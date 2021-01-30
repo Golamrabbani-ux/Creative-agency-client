@@ -21,7 +21,7 @@ const ServiceCard = ({ service }) => {
   const history = useHistory();
 
   const handleOrder = (id) => {
-    fetch('http://localhost:5000/getService/' + id)
+    fetch('https://creative-agency-gr.herokuapp.com/getService/' + id)
       .then((res) => res.json())
       .then((data) => {
         history.push({

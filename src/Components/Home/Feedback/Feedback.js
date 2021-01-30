@@ -6,7 +6,7 @@ const Feedback = () => {
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:5000/getAllReview')
+    fetch('https://creative-agency-gr.herokuapp.com/getAllReview')
       .then((res) => res.json())
       .then((data) => {
         setReviews(data);

@@ -21,7 +21,7 @@ const ReviewForm = () => {
       photo: getPhoto(),
     };
 
-    fetch('http://localhost:5000/addReview', {
+    fetch('https://creative-agency-gr.herokuapp.com/addReview', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

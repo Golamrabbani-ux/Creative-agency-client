@@ -7,7 +7,7 @@ const OurServices = () => {
 
   useEffect(() => {
     let isMounted = true;
-    fetch('http://localhost:5000/getAllServices')
+    fetch('https://creative-agency-gr.herokuapp.com/getAllServices')
       .then((res) => res.json())
       .then((data) => {
         if (isMounted) {

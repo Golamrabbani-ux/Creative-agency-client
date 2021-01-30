@@ -8,7 +8,7 @@ const AdminServiceList = () => {
 
   useEffect(() => {
     let isMounted = true;
-    fetch('http://localhost:5000/getAllOrders')
+    fetch('https://creative-agency-gr.herokuapp.com/getAllOrders')
       .then((res) => res.json())
       .then((data) => {
         if (isMounted) {
@@ -24,7 +24,7 @@ const AdminServiceList = () => {
     const status = e.target.value;
     const data = { status: status };
     console.log(status);
-    fetch('http://localhost:5000/updateOrder/' + id, {
+    fetch('https://creative-agency-gr.herokuapp.com/updateOrder/' + id, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',

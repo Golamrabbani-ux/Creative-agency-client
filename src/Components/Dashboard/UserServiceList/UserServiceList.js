@@ -11,7 +11,7 @@ const UserServiceList = () => {
 
   useEffect(() => {
     fetch(
-      'http://localhost:5000/getAllUserServices/' + email
+      'https://creative-agency-gr.herokuapp.com/getAllUserServices/' + email
     )
       .then((res) => res.json())
       .then((data) => {

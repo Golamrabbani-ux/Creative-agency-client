@@ -27,7 +27,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     const data = { email: user.email };
-    fetch('http://localhost:5000/isAdmin', {
+    fetch('https://creative-agency-gr.herokuapp.com/isAdmin', {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',

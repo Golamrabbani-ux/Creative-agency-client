@@ -20,7 +20,7 @@ const OrderForm = () => {
   const onSubmit = (data, e) => {
     const newData = { ...data, status: 'pending', image: service.image };
 
-    fetch('http://localhost:5000/addOrder', {
+    fetch('https://creative-agency-gr.herokuapp.com/addOrder', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -1,0 +1,106 @@
+import React, { useEffect, useState } from 'react';
+import preLoader from '../../../images/logos/loader.gif';
+import Swal from 'sweetalert2';
+import './AdminServiceList.css';
+
+const AdminServiceList = () => {
+  const [allList, setAllList] = useState([]);
+
+  useEffect(() => {
+    let isMounted = true;
+    fetch('http://localhost:5000/getAllOrders')
+      .then((res) => res.json())
+      .then((data) => {
+        if (isMounted) {
+          setAllList(data);
+        }
+      });
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  const handleSelect = (e, id) => {
+    const status = e.target.value;
+    const data = { status: status };
+    console.log(status);
+    fetch('http://localhost:5000/updateOrder/' + id, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        Swal.fire('Okay', 'Status updated successfully', 'success');
+        window.location.reload();
+      });
+
+    e.preventDefault();
+  };
+
+  return (
+    <table className="table table-sm table-hover">
+      <thead className="thead-light">
+        <tr className="text-center">
+          <th>Name</th>
+          <th>Email</th>
+          <th>Service name</th>
+          <th>Details</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {!allList.length ? (
+          <tr className="text-center">
+            <td colSpan="5">
+              <img src={preLoader} alt="" />
+            </td>
+          </tr>
+        ) : (
+          allList.map((list) => renderTableData(list, handleSelect))
+        )}
+      </tbody>
+    </table>
+  );
+};
+
+function renderTableData(list, handleSelect) {
+  const { _id, name, email, service, description, status } = list;
+  return (
+    <tr key={_id}>
+      <td>{name}</td>
+      <td>{email}</td>
+      <td>{service}</td>
+      <td>{description}</td>
+      <td>
+        <select
+          value={status}
+          onChange={(e) => handleSelect(e, _id)}
+          className={
+            status === 'pending'
+              ? 'pending-status'
+              : status === 'done'
+              ? 'done-status'
+              : 'onGoing-status'
+          }
+          name="status"
+          id="status"
+        >
+          <option className="pending-status" value="pending">
+            Pending
+          </option>
+          <option className="onGoing-status" value="on going">
+            On Going
+          </option>
+          <option className="done-status" value="done">
+            Done
+          </option>
+        </select>
+      </td>
+    </tr>
+  );
+}
+
+export default AdminServiceList;
